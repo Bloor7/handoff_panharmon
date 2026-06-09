@@ -1,0 +1,584 @@
+{
+  "source": "Panharmon Vietnamese cultural symbols",
+  "sources": [
+    "https://vietnamtourism.vn/en/index.php/news/items/17988",
+    "https://baotanglichsu.vn/en/Articles/1004/19804/vietnams-national-treasure-ngoc-lu-bronze-drum.html",
+    "https://english.vov.vn/en/culture/hung-temples-bronze-drum-a-sacred-symbol-of-the-vietnamese-people-396298.vov",
+    "https://vietnamtourism.vn/en/index.php/about/items/1888",
+    "https://vietnamtourism.vn/en/index.php/news/items/6735",
+    "https://vietnamtourism.vn/en/index.php/about/items/2447",
+    "https://vietnamtourism.vn/en/index.php/about/cat/0520",
+    "https://vietnamtourism.vn/en/index.php/about/items/1874",
+    "https://vietnamtourism.gov.vn/en/post/14642"
+  ],
+  "total": 81,
+  "entries": [
+    {
+      "t": "VN Dong Son bronze drum",
+      "v": "Trống đồng Đông Sơn",
+      "l": "V",
+      "d": "Mơ thấy trống đồng Đông Sơn là tiếng gọi của cội nguồn, ký ức tổ tiên và nhịp cộng đồng. Biểu tượng này thường nhắc bạn quay về một nền tảng sâu hơn trước khi bước sang việc lớn.",
+      "g": ["tam-linh", "quyen-luc", "ban-nga"]
+    },
+    {
+      "t": "VN Ngoc Lu drum",
+      "v": "Trống đồng Ngọc Lũ",
+      "l": "V",
+      "d": "Trống đồng Ngọc Lũ trong mơ gợi một trung tâm linh thiêng: mặt trời, vòng người, chim bay và nhịp lễ. Nó nói về sự kết nối giữa thân phận cá nhân với dòng chảy văn hóa lâu đời.",
+      "g": ["tam-linh", "ban-nga", "thay-doi"]
+    },
+    {
+      "t": "VN Lac bird",
+      "v": "Chim Lạc",
+      "l": "V",
+      "d": "Chim Lạc là dấu hiệu của khát vọng bay lên, tự do và ký ức Lạc Việt. Nếu chim bay trong mơ, bạn có thể đang tìm lại một hướng đi nhẹ hơn nhưng vẫn gắn với căn tính của mình.",
+      "g": ["tu-do", "ban-nga", "tam-linh"]
+    },
+    {
+      "t": "VN bronze drum sun",
+      "v": "Mặt trời trên trống đồng",
+      "l": "V",
+      "d": "Mặt trời giữa trống đồng tượng trưng cho nguồn sống, mùa màng và trục trung tâm của đời sống. Trong mơ, nó thường hỏi bạn điều gì đang là tâm điểm thật sự của mình.",
+      "g": ["thay-doi", "tam-linh", "thanh-cong"]
+    },
+    {
+      "t": "VN dragon",
+      "v": "Rồng Việt",
+      "l": "V",
+      "d": "Rồng Việt gắn với mưa, sông nước, quyền uy và huyền thoại Con Rồng Cháu Tiên. Mơ thấy rồng thường báo hiệu sức mạnh đang trỗi dậy, nhưng cũng nhắc bạn dùng quyền lực với sự mềm mại.",
+      "g": ["quyen-luc", "thanh-cong", "tam-linh"]
+    },
+    {
+      "t": "VN fairy mother Au Co",
+      "v": "Mẹ Âu Cơ",
+      "l": "V",
+      "d": "Mẹ Âu Cơ trong mơ là hình ảnh mẫu tính, nguồn sinh và sự chia đàn để trưởng thành. Biểu tượng này thường xuất hiện khi bạn phải chọn giữa ở lại trong vòng thân thuộc hay đi về phía núi riêng của mình.",
+      "g": ["gia-dinh", "thay-doi", "tam-linh"]
+    },
+    {
+      "t": "VN Lac Long Quan",
+      "v": "Lạc Long Quân",
+      "l": "V",
+      "d": "Lạc Long Quân gợi sức mạnh sông biển, dòng cha và phần bản năng sâu. Trong mơ, hình ảnh này thường liên quan đến bảo hộ, nguồn gốc và nhu cầu trở về với sức mạnh nguyên thủy.",
+      "g": ["gia-dinh", "quyen-luc", "tu-nhien"]
+    },
+    {
+      "t": "VN hundred eggs",
+      "v": "Bọc trăm trứng",
+      "l": "V",
+      "d": "Bọc trăm trứng là biểu tượng của nguồn gốc chung và sự sinh sôi. Mơ thấy hình ảnh này có thể nói về gia đình, cộng đồng, hoặc một dự án đang chứa nhiều mầm sống chưa nở.",
+      "g": ["gia-dinh", "thay-doi", "thanh-cong"]
+    },
+    {
+      "t": "VN lotus",
+      "v": "Hoa sen Việt",
+      "l": "V",
+      "d": "Hoa sen mọc từ bùn mà vẫn thanh sạch. Trong mơ, sen thường gợi khả năng giữ phẩm chất trong hoàn cảnh khó, hoặc một tầng tâm linh đang mở ra sau giai đoạn nặng nề.",
+      "g": ["tam-linh", "suc-khoe", "thay-doi"]
+    },
+    {
+      "t": "VN conical hat",
+      "v": "Nón lá",
+      "l": "V",
+      "d": "Nón lá là mái che khiêm nhường của đời sống Việt. Mơ thấy nón lá thường nói về sự bảo bọc, nét duyên kín đáo, hoặc mong muốn được trở về với một nhịp sống giản dị hơn.",
+      "g": ["gia-dinh", "ban-nga", "tu-do"]
+    },
+    {
+      "t": "VN ao dai",
+      "v": "Áo dài",
+      "l": "V",
+      "d": "Áo dài trong mơ là dáng hình của phẩm cách, ký ức nữ tính và sự hiện diện trang trọng. Nó có thể phản chiếu cách bạn muốn được nhìn thấy: mềm mại nhưng có trục sống rõ ràng.",
+      "g": ["ban-nga", "tinh-yeu", "thanh-cong"]
+    },
+    {
+      "t": "VN betel and areca",
+      "v": "Trầu cau",
+      "l": "V",
+      "d": "Trầu cau gắn với cưới hỏi, thờ cúng và lời mở đầu của tình nghĩa. Trong mơ, trầu cau thường nhắc về cam kết, duyên phận, lời hứa hoặc một mối quan hệ cần được nói cho trọn.",
+      "g": ["tinh-yeu", "gia-dinh", "tam-linh"]
+    },
+    {
+      "t": "VN betel quid",
+      "v": "Miếng trầu têm cánh phượng",
+      "l": "V",
+      "d": "Miếng trầu têm cánh phượng là biểu tượng của sự khéo léo, lễ nghĩa và lời mời thân tình. Mơ thấy nó có thể cho thấy bạn đang cần mở một cuộc đối thoại bằng sự tinh tế thay vì vội vàng.",
+      "g": ["tinh-yeu", "gia-dinh", "ban-nga"]
+    },
+    {
+      "t": "VN ancestor altar",
+      "v": "Bàn thờ gia tiên",
+      "l": "V",
+      "d": "Bàn thờ gia tiên trong mơ là nơi ký ức dòng họ trở thành tiếng nói bên trong. Nó thường xuất hiện khi bạn cần xin phép, biết ơn, hóa giải hoặc nối lại một phần gốc rễ bị bỏ quên.",
+      "g": ["tam-linh", "gia-dinh", "mat-mat"]
+    },
+    {
+      "t": "VN incense smoke",
+      "v": "Khói hương",
+      "l": "V",
+      "d": "Khói hương là đường mỏng nối hữu hình và vô hình. Trong mơ, khói hương có thể báo hiệu nhu cầu tưởng nhớ, cầu an, hoặc một thông điệp trực giác đang hiện lên nhưng chưa thành lời.",
+      "g": ["tam-linh", "mat-mat", "bi-an"]
+    },
+    {
+      "t": "VN ancestral tablet",
+      "v": "Bài vị tổ tiên",
+      "l": "V",
+      "d": "Bài vị tổ tiên gợi danh phận, gốc nhà và lời nhắc về trách nhiệm kế thừa. Mơ thấy bài vị thường liên quan đến câu hỏi: bạn đang mang điều gì của người đi trước trong đời mình?",
+      "g": ["gia-dinh", "tam-linh", "ban-nga"]
+    },
+    {
+      "t": "VN village gate",
+      "v": "Cổng làng",
+      "l": "V",
+      "d": "Cổng làng là ranh giới giữa đi xa và trở về. Trong mơ, bước qua cổng làng có thể là dấu hiệu bạn đang đối diện với căn tính cộng đồng, quê hương hoặc một ngưỡng chuyển đời.",
+      "g": ["ban-nga", "thay-doi", "gia-dinh"]
+    },
+    {
+      "t": "VN banyan tree",
+      "v": "Cây đa đầu làng",
+      "l": "V",
+      "d": "Cây đa đầu làng là bóng rễ của ký ức, nơi người sống gặp chuyện cũ. Mơ thấy cây đa thường nói về sự che chở, lời đồn, linh khí đất làng hoặc một bí mật lâu năm.",
+      "g": ["tam-linh", "gia-dinh", "bi-an"]
+    },
+    {
+      "t": "VN communal house",
+      "v": "Đình làng",
+      "l": "V",
+      "d": "Đình làng là trung tâm lễ hội, luật tục và sự công nhận của cộng đồng. Trong mơ, đình làng hỏi bạn đang thuộc về đâu và có đang sống đúng với lời hứa trước tập thể hay không.",
+      "g": ["gia-dinh", "quyen-luc", "tam-linh"]
+    },
+    {
+      "t": "VN village well",
+      "v": "Giếng làng",
+      "l": "V",
+      "d": "Giếng làng là mạch nước chung, nơi soi bóng và nuôi sống. Mơ thấy giếng làng thường gợi ký ức sâu, cảm xúc bị lắng xuống hoặc nhu cầu tìm lại nguồn nước trong mình.",
+      "g": ["tu-nhien", "ban-nga", "mat-mat"]
+    },
+    {
+      "t": "VN bamboo grove",
+      "v": "Lũy tre",
+      "l": "V",
+      "d": "Lũy tre tượng trưng cho biên giới mềm của làng quê: dẻo dai, bền bỉ và biết bảo vệ. Trong mơ, tre nhắc bạn giữ cốt cách thẳng nhưng đừng cứng đến gãy.",
+      "g": ["tu-nhien", "gia-dinh", "suc-khoe"]
+    },
+    {
+      "t": "VN rice field",
+      "v": "Ruộng lúa",
+      "l": "V",
+      "d": "Ruộng lúa là biểu tượng của lao động, mùa vụ và sự chờ đợi. Mơ thấy ruộng lúa thường liên quan đến thành quả đang lớn dần, miễn là bạn tiếp tục chăm sóc đúng nhịp.",
+      "g": ["thanh-cong", "tu-nhien", "tien-bac"]
+    },
+    {
+      "t": "VN golden rice",
+      "v": "Lúa chín vàng",
+      "l": "V",
+      "d": "Lúa chín vàng trong mơ là dấu hiệu của mùa gặt, sự đủ đầy và công sức được đáp lại. Nó cũng nhắc bạn biết thu hoạch đúng lúc, không để cơ hội rụng khỏi tay.",
+      "g": ["thanh-cong", "tien-bac", "tu-nhien"]
+    },
+    {
+      "t": "VN buffalo",
+      "v": "Con trâu",
+      "l": "V",
+      "d": "Con trâu gắn với ruộng đồng, sức bền và đời sống nông nghiệp Việt. Mơ thấy trâu thường nói về sự chịu khó, tài sản nền tảng hoặc một sức mạnh lặng lẽ đang kéo bạn đi qua mùa khó.",
+      "g": ["suc-khoe", "tien-bac", "tu-nhien"]
+    },
+    {
+      "t": "VN water buffalo horn",
+      "v": "Sừng trâu",
+      "l": "V",
+      "d": "Sừng trâu là dấu hiệu của sức chống đỡ và bản năng tự vệ. Trong mơ, nó có thể nhắc bạn cần vạch ranh giới, nhưng đừng để sự phòng thủ biến thành cố chấp.",
+      "g": ["quyen-luc", "xung-dot", "suc-khoe"]
+    },
+    {
+      "t": "VN bamboo dragonfly",
+      "v": "Chuồn chuồn tre",
+      "l": "V",
+      "d": "Chuồn chuồn tre gợi tuổi thơ, cân bằng và phép màu giản dị. Mơ thấy nó thường là lời nhắc rằng sự ổn định đôi khi đến từ một điểm tựa rất nhỏ.",
+      "g": ["ban-nga", "tu-do", "gia-dinh"]
+    },
+    {
+      "t": "VN water puppet",
+      "v": "Múa rối nước",
+      "l": "V",
+      "d": "Múa rối nước là sân khấu của làng quê trên mặt nước. Trong mơ, nó có thể nói về những cảm xúc đang được điều khiển phía sau màn, hoặc niềm vui dân gian cần được đánh thức.",
+      "g": ["bi-an", "tu-nhien", "ban-nga"]
+    },
+    {
+      "t": "VN Teu puppet",
+      "v": "Chú Tễu",
+      "l": "V",
+      "d": "Chú Tễu là tiếng cười mở màn, sự hóm hỉnh phá băng và trí khôn dân gian. Mơ thấy Chú Tễu có thể khuyên bạn nói thật bằng nụ cười thay vì bằng đối đầu.",
+      "g": ["ban-nga", "tu-do", "xung-dot"]
+    },
+    {
+      "t": "VN Dong Ho painting",
+      "v": "Tranh Đông Hồ",
+      "l": "V",
+      "d": "Tranh Đông Hồ mang màu dân gian, lời chúc và bài học đời sống. Trong mơ, nó thường biến chuyện thường ngày thành biểu tượng, nhắc bạn nhìn lại đạo lý giản dị trong một tình huống phức tạp.",
+      "g": ["gia-dinh", "tam-linh", "ban-nga"]
+    },
+    {
+      "t": "VN Rat wedding painting",
+      "v": "Đám cưới chuột",
+      "l": "V",
+      "d": "Đám cưới chuột là biểu tượng châm biếm về quyền lực, lễ nghĩa và sự nhún nhường để được yên thân. Mơ thấy cảnh này có thể phản chiếu một cuộc thương lượng không thật công bằng.",
+      "g": ["quyen-luc", "xung-dot", "tien-bac"]
+    },
+    {
+      "t": "VN Dong Ho piglets",
+      "v": "Lợn đàn Đông Hồ",
+      "l": "V",
+      "d": "Lợn đàn trong tranh Đông Hồ gợi sung túc, sinh sôi và niềm vui gia đạo. Trong mơ, nó thường báo hiệu nhu cầu chăm sóc nguồn lực gia đình hoặc một mùa đủ đầy đang đến gần.",
+      "g": ["gia-dinh", "tien-bac", "thanh-cong"]
+    },
+    {
+      "t": "VN Dong Ho rooster",
+      "v": "Gà trống Đông Hồ",
+      "l": "V",
+      "d": "Gà trống Đông Hồ là tiếng gọi bình minh, khí dương và sự tỉnh thức. Mơ thấy nó nhắc bạn đứng thẳng, cất tiếng đúng lúc và bắt đầu ngày mới bằng sự rõ ràng.",
+      "g": ["thanh-cong", "quyen-luc", "thay-doi"]
+    },
+    {
+      "t": "VN five fruit tray",
+      "v": "Mâm ngũ quả",
+      "l": "V",
+      "d": "Mâm ngũ quả là lời cầu đủ đầy qua màu sắc và mùa trái. Trong mơ, nó gợi sự biết ơn, ước nguyện gia đình và cách bạn sắp đặt những điều quý nhất lên một bàn thờ nội tâm.",
+      "g": ["gia-dinh", "tien-bac", "tam-linh"]
+    },
+    {
+      "t": "VN Tet peach blossom",
+      "v": "Hoa đào ngày Tết",
+      "l": "V",
+      "d": "Hoa đào là sắc xuân miền Bắc, xua lạnh và gọi khởi đầu mới. Mơ thấy đào nở thường báo hiệu một chu kỳ cũ đang khép lại để nhường chỗ cho sinh khí mới.",
+      "g": ["thay-doi", "tinh-yeu", "gia-dinh"]
+    },
+    {
+      "t": "VN apricot blossom",
+      "v": "Hoa mai vàng",
+      "l": "V",
+      "d": "Hoa mai vàng gợi Tết phương Nam, may mắn và sự bừng sáng sau mùa chờ. Trong mơ, mai vàng thường nói về hy vọng, tài lộc và một niềm vui đang nở đúng thời.",
+      "g": ["thanh-cong", "tien-bac", "thay-doi"]
+    },
+    {
+      "t": "VN banh chung",
+      "v": "Bánh chưng",
+      "l": "V",
+      "d": "Bánh chưng là hình vuông của đất, của Tết và lòng biết ơn cha mẹ. Mơ thấy bánh chưng thường kéo bạn về với nền tảng gia đình, sự kiên nhẫn và việc gói ghém lại điều quan trọng.",
+      "g": ["gia-dinh", "tam-linh", "tu-nhien"]
+    },
+    {
+      "t": "VN banh tet",
+      "v": "Bánh tét",
+      "l": "V",
+      "d": "Bánh tét là thân trụ của ngày Tết phương Nam, gói trong lá xanh và dây buộc. Trong mơ, nó gợi sự tiếp nối, bền bỉ và niềm vui được chia thành từng khoanh nhỏ.",
+      "g": ["gia-dinh", "thanh-cong", "tu-nhien"]
+    },
+    {
+      "t": "VN red envelope",
+      "v": "Bao lì xì",
+      "l": "V",
+      "d": "Bao lì xì là lời chúc may mắn được đặt trong sắc đỏ. Mơ thấy lì xì có thể nói về phước lành, món quà nhỏ, hoặc mong muốn được công nhận bằng một tín hiệu vui.",
+      "g": ["tien-bac", "gia-dinh", "thanh-cong"]
+    },
+    {
+      "t": "VN kitchen gods",
+      "v": "Ông Công Ông Táo",
+      "l": "V",
+      "d": "Ông Công Ông Táo trong mơ gợi việc tổng kết một năm sống trong bếp nhà: lời nói, bữa ăn, nóng lạnh gia đình. Đây là biểu tượng của báo cáo nội tâm và nhu cầu dọn lại mái ấm.",
+      "g": ["gia-dinh", "tam-linh", "thay-doi"]
+    },
+    {
+      "t": "VN carp to heaven",
+      "v": "Cá chép hóa rồng",
+      "l": "V",
+      "d": "Cá chép hóa rồng là biểu tượng vượt vũ môn, thi cử và chuyển thân. Mơ thấy cá chép bay lên thường báo một thử thách có thể biến bạn thành phiên bản mạnh hơn.",
+      "g": ["thanh-cong", "thay-doi", "tu-do"]
+    },
+    {
+      "t": "VN Hoan Kiem turtle",
+      "v": "Rùa Hồ Gươm",
+      "l": "V",
+      "d": "Rùa Hồ Gươm gợi trí nhớ lịch sử, thanh gươm được trả và sự khôn ngoan biết dừng. Trong mơ, rùa nhắc bạn hoàn lại điều không còn thuộc về mình để giữ sự bình an.",
+      "g": ["tam-linh", "quyen-luc", "thay-doi"]
+    },
+    {
+      "t": "VN sword of Hoan Kiem",
+      "v": "Gươm thần Hồ Gươm",
+      "l": "V",
+      "d": "Gươm thần là biểu tượng của chính nghĩa, quyền lực được trao và bổn phận phải hoàn trả. Mơ thấy gươm này thường liên quan đến một quyết định lớn cần đi cùng đạo lý.",
+      "g": ["quyen-luc", "xung-dot", "tam-linh"]
+    },
+    {
+      "t": "VN one pillar pagoda",
+      "v": "Chùa Một Cột",
+      "l": "V",
+      "d": "Chùa Một Cột như một đóa sen nâng trên mặt nước. Trong mơ, hình ảnh này gợi niềm tin đứng vững trên một trụ nhỏ, hoặc sự thanh tịnh mọc lên giữa bất ổn.",
+      "g": ["tam-linh", "suc-khoe", "ban-nga"]
+    },
+    {
+      "t": "VN temple bell",
+      "v": "Chuông chùa",
+      "l": "V",
+      "d": "Chuông chùa là âm thanh đánh thức và làm dịu tâm. Mơ nghe chuông chùa thường báo hiệu bạn cần dừng lại, lắng nghe sâu hơn và buông bớt tiếng ồn trong lòng.",
+      "g": ["tam-linh", "suc-khoe", "mat-mat"]
+    },
+    {
+      "t": "VN wooden fish",
+      "v": "Mõ chùa",
+      "l": "V",
+      "d": "Mõ chùa giữ nhịp cho lời tụng và sự tỉnh thức. Trong mơ, tiếng mõ nhắc bạn quay về kỷ luật nhẹ nhàng: từng nhịp nhỏ có thể đưa tâm trí ra khỏi hỗn loạn.",
+      "g": ["tam-linh", "suc-khoe", "ban-nga"]
+    },
+    {
+      "t": "VN Mother Goddess",
+      "v": "Mẫu Tam Phủ",
+      "l": "V",
+      "d": "Mẫu Tam Phủ là năng lượng mẫu tính của trời, nước, núi rừng và đời sống. Mơ thấy Mẫu thường gợi sự che chở, căn đồng, trực giác nữ tính hoặc nhu cầu được ôm giữ bởi một quyền năng mềm.",
+      "g": ["tam-linh", "gia-dinh", "quyen-luc"]
+    },
+    {
+      "t": "VN red altar cloth",
+      "v": "Khăn phủ ban thờ đỏ",
+      "l": "V",
+      "d": "Khăn đỏ trên ban thờ gợi sự trang nghiêm, máu mạch và lời khấn được đặt đúng chỗ. Trong mơ, nó nhắc bạn phân biệt điều thiêng với điều thường.",
+      "g": ["tam-linh", "gia-dinh", "bi-an"]
+    },
+    {
+      "t": "VN gong culture",
+      "v": "Cồng chiêng Tây Nguyên",
+      "l": "V",
+      "d": "Cồng chiêng là tiếng gọi cộng đồng, rừng núi và lễ hội. Mơ nghe cồng chiêng thường báo rằng thân thể bạn đang nhớ một nhịp nguyên sơ hơn nhịp sống hiện tại.",
+      "g": ["tam-linh", "tu-nhien", "gia-dinh"]
+    },
+    {
+      "t": "VN long house",
+      "v": "Nhà dài Tây Nguyên",
+      "l": "V",
+      "d": "Nhà dài Tây Nguyên là hình ảnh của dòng mẹ, cộng cư và sự nối dài của gia tộc. Trong mơ, nó gợi nhu cầu thuộc về một mái nhà rộng hơn cái tôi cá nhân.",
+      "g": ["gia-dinh", "ban-nga", "tam-linh"]
+    },
+    {
+      "t": "VN stilt house",
+      "v": "Nhà sàn",
+      "l": "V",
+      "d": "Nhà sàn nâng đời sống lên khỏi mặt đất ẩm, tạo khoảng thở giữa người và thiên nhiên. Mơ thấy nhà sàn gợi sự thích nghi, bảo vệ và nhịp sống biết nghe địa hình.",
+      "g": ["gia-dinh", "tu-nhien", "suc-khoe"]
+    },
+    {
+      "t": "VN brocade",
+      "v": "Thổ cẩm",
+      "l": "V",
+      "d": "Thổ cẩm là ký ức được dệt bằng màu, họa tiết và bàn tay. Trong mơ, nó nói về căn tính, sự kiên nhẫn và những câu chuyện gia tộc được giữ trong từng đường chỉ.",
+      "g": ["ban-nga", "gia-dinh", "thanh-cong"]
+    },
+    {
+      "t": "VN Cham tower",
+      "v": "Tháp Chăm",
+      "l": "V",
+      "d": "Tháp Chăm gợi lửa gạch, thần linh và ký ức miền Trung. Trong mơ, nó có thể là dấu vết của một nền văn hóa trong bạn đang đòi được nhìn nhận.",
+      "g": ["tam-linh", "bi-an", "ban-nga"]
+    },
+    {
+      "t": "VN Cham pottery",
+      "v": "Gốm Chăm",
+      "l": "V",
+      "d": "Gốm Chăm được nắn bằng tay và nung trong lửa mở. Mơ thấy gốm Chăm thường nói về quá trình được tạo hình bởi nhiệt, đất và ký ức nữ giới.",
+      "g": ["thay-doi", "tu-nhien", "ban-nga"]
+    },
+    {
+      "t": "VN Hue royal music",
+      "v": "Nhã nhạc cung đình Huế",
+      "l": "V",
+      "d": "Nhã nhạc cung đình Huế là âm thanh của trật tự, lễ nghi và quyền uy tinh tế. Trong mơ, nó nhắc bạn tìm lại nhịp trang trọng cho một việc đang bị làm quá vội.",
+      "g": ["quyen-luc", "tam-linh", "ban-nga"]
+    },
+    {
+      "t": "VN Hue citadel",
+      "v": "Kinh thành Huế",
+      "l": "V",
+      "d": "Kinh thành Huế gợi lớp thành quách, ký ức vương triều và những điều được giữ kín sau cổng. Mơ thấy nơi này thường liên quan đến quyền lực, quá khứ và sự phòng vệ cảm xúc.",
+      "g": ["quyen-luc", "mat-mat", "bi-an"]
+    },
+    {
+      "t": "VN dragon boat",
+      "v": "Thuyền rồng",
+      "l": "V",
+      "d": "Thuyền rồng là chuyến đi trên nước với đầu rồng dẫn hướng. Trong mơ, nó gợi hành trình có phẩm giá, sự hộ tống của truyền thống và khát vọng đi xa mà không mất gốc.",
+      "g": ["du-hanh", "quyen-luc", "tam-linh"]
+    },
+    {
+      "t": "VN floating lantern",
+      "v": "Hoa đăng",
+      "l": "V",
+      "d": "Hoa đăng là ngọn sáng thả trên nước, gửi đi ước nguyện và tưởng nhớ. Mơ thấy hoa đăng thường nói về buông bỏ, cầu an hoặc một lời chúc đang trôi khỏi tay để tìm đường riêng.",
+      "g": ["tam-linh", "mat-mat", "tu-do"]
+    },
+    {
+      "t": "VN Hoi An lantern",
+      "v": "Đèn lồng Hội An",
+      "l": "V",
+      "d": "Đèn lồng Hội An gợi phố cổ, ký ức thương cảng và ánh sáng mềm trong đêm. Trong mơ, nó nhắc bạn tìm vẻ đẹp ở điều cũ, chậm và đã được thời gian lọc lại.",
+      "g": ["bi-an", "tinh-yeu", "ban-nga"]
+    },
+    {
+      "t": "VN cyclo",
+      "v": "Xích lô",
+      "l": "V",
+      "d": "Xích lô là nhịp chậm của phố, người chở và người được chở. Mơ thấy xích lô có thể nói về việc bạn đang để ai đó dẫn mình qua ký ức, hoặc cần đi chậm để nhìn rõ hơn.",
+      "g": ["du-hanh", "ban-nga", "mat-mat"]
+    },
+    {
+      "t": "VN old quarter alley",
+      "v": "Ngõ phố cổ",
+      "l": "V",
+      "d": "Ngõ phố cổ trong mơ là mê cung của ký ức, mùi nhà cũ và những lối rẽ nhỏ. Nó thường xuất hiện khi bạn đang tìm một câu trả lời không nằm ở đường lớn.",
+      "g": ["bi-an", "du-hanh", "ban-nga"]
+    },
+    {
+      "t": "VN market basket",
+      "v": "Làn đi chợ",
+      "l": "V",
+      "d": "Làn đi chợ gợi chăm sóc, tính toán và nhịp sống gia đình. Mơ thấy nó thường liên quan đến việc bạn đang gom góp nguồn lực, tình cảm hoặc trách nhiệm cho người thân.",
+      "g": ["gia-dinh", "tien-bac", "suc-khoe"]
+    },
+    {
+      "t": "VN shoulder pole",
+      "v": "Đòn gánh",
+      "l": "V",
+      "d": "Đòn gánh là hình ảnh của cân bằng và gánh vác. Trong mơ, nó hỏi hai đầu đời bạn đang mang có còn cân nhau không, hay một bên đã quá nặng.",
+      "g": ["suc-khoe", "gia-dinh", "tien-bac"]
+    },
+    {
+      "t": "VN fish sauce jar",
+      "v": "Chum nước mắm",
+      "l": "V",
+      "d": "Chum nước mắm là thời gian lên men thành vị mặn sâu. Mơ thấy nó gợi điều tưởng nặng mùi nhưng đang chín thành bản sắc, kinh nghiệm hoặc gia vị riêng của đời bạn.",
+      "g": ["thay-doi", "gia-dinh", "ban-nga"]
+    },
+    {
+      "t": "VN rice mortar",
+      "v": "Cối giã gạo",
+      "l": "V",
+      "d": "Cối giã gạo là nhịp lao động biến hạt thô thành bữa ăn. Trong mơ, nó nói về sự rèn luyện đều đặn và những va chạm cần thiết để làm lộ phần tinh của bạn.",
+      "g": ["thanh-cong", "suc-khoe", "gia-dinh"]
+    },
+    {
+      "t": "VN bamboo flute",
+      "v": "Sáo trúc",
+      "l": "V",
+      "d": "Sáo trúc là hơi thở đi qua thân tre rỗng để thành âm. Mơ nghe sáo trúc thường nhắc bạn trống bớt bên trong để tiếng nói thật có thể vang lên.",
+      "g": ["tu-do", "ban-nga", "suc-khoe"]
+    },
+    {
+      "t": "VN dan bau",
+      "v": "Đàn bầu",
+      "l": "V",
+      "d": "Đàn bầu chỉ một dây mà mở ra nhiều cung bậc. Trong mơ, nó gợi sự cô độc có âm vang, nỗi nhớ quê và khả năng biến ít thành nhiều.",
+      "g": ["mat-mat", "ban-nga", "tam-linh"]
+    },
+    {
+      "t": "VN lion dance head",
+      "v": "Đầu lân",
+      "l": "V",
+      "d": "Đầu lân là niềm vui lễ hội, may mắn và sức mạnh xua điều xấu. Mơ thấy đầu lân thường báo nhu cầu làm mới khí vận, hoặc gọi lại sự rộn ràng đã vắng trong nhà.",
+      "g": ["thanh-cong", "gia-dinh", "quyen-luc"]
+    },
+    {
+      "t": "VN Mid Autumn lantern",
+      "v": "Đèn ông sao",
+      "l": "V",
+      "d": "Đèn ông sao gắn với Trung Thu, trẻ nhỏ và ánh sáng cầm trên tay. Trong mơ, nó thường đưa bạn về phần hồn nhiên đang cần được bảo vệ.",
+      "g": ["gia-dinh", "ban-nga", "tu-do"]
+    },
+    {
+      "t": "VN moon cake",
+      "v": "Bánh Trung Thu",
+      "l": "V",
+      "d": "Bánh Trung Thu là vầng trăng được chia thành miếng, gợi đoàn viên và phần nhân giấu bên trong. Mơ thấy bánh này thường nói về gia đình, sự tròn đầy hoặc điều ngọt đang được bọc kín.",
+      "g": ["gia-dinh", "tinh-yeu", "bi-an"]
+    },
+    {
+      "t": "VN paper votive horse",
+      "v": "Ngựa giấy",
+      "l": "V",
+      "d": "Ngựa giấy là phương tiện gửi sang cõi vô hình trong nghi lễ dân gian. Trong mơ, nó có thể gợi một hành trình tâm linh, lời tiễn biệt hoặc mong muốn giúp ai đó đi tiếp.",
+      "g": ["tam-linh", "mat-mat", "du-hanh"]
+    },
+    {
+      "t": "VN votive paper",
+      "v": "Vàng mã",
+      "l": "V",
+      "d": "Vàng mã trong mơ gợi sự trao gửi, nợ nghĩa và cách người sống chăm sóc người khuất. Nó nhắc bạn xem mình đang đốt điều gì để đổi lấy bình yên.",
+      "g": ["tam-linh", "mat-mat", "tien-bac"]
+    },
+    {
+      "t": "VN red thread charm",
+      "v": "Sợi chỉ đỏ",
+      "l": "V",
+      "d": "Sợi chỉ đỏ là dấu hiệu của duyên, bảo hộ và mối nối vô hình. Mơ thấy nó thường nói về một liên kết tình cảm chưa đứt, hoặc một lời hẹn đang âm thầm kéo hai phía lại gần.",
+      "g": ["tinh-yeu", "tam-linh", "gia-dinh"]
+    },
+    {
+      "t": "VN silk village",
+      "v": "Làng lụa",
+      "l": "V",
+      "d": "Làng lụa gợi bàn tay nghề, sợi tơ và vẻ đẹp cần thời gian. Trong mơ, nó nói về sự tinh luyện: điều mềm mại nhất có thể là thành quả của nhiều lớp công phu.",
+      "g": ["thanh-cong", "ban-nga", "tinh-yeu"]
+    },
+    {
+      "t": "VN pottery kiln",
+      "v": "Lò gốm",
+      "l": "V",
+      "d": "Lò gốm là nơi đất chịu lửa để thành hình bền. Mơ thấy lò gốm thường báo bạn đang ở giai đoạn thử nhiệt: khó chịu nhưng cần thiết để định dạng lại bản thân.",
+      "g": ["thay-doi", "suc-khoe", "thanh-cong"]
+    },
+    {
+      "t": "VN wooden boat on river",
+      "v": "Thuyền gỗ trên sông",
+      "l": "V",
+      "d": "Thuyền gỗ trên sông là hành trình mềm theo dòng nước. Trong mơ, nó gợi cách đi không cưỡng dòng, biết nương con nước nhưng vẫn giữ mái chèo trong tay.",
+      "g": ["du-hanh", "tu-nhien", "tu-do"]
+    },
+    {
+      "t": "VN Mekong floating market",
+      "v": "Chợ nổi miền Tây",
+      "l": "V",
+      "d": "Chợ nổi miền Tây là trao đổi, mưu sinh và tiếng gọi nhau trên nước. Mơ thấy chợ nổi thường liên quan đến cơ hội, dòng tiền và khả năng thích nghi với biến động.",
+      "g": ["tien-bac", "du-hanh", "tu-nhien"]
+    },
+    {
+      "t": "VN river ferry",
+      "v": "Bến đò",
+      "l": "V",
+      "d": "Bến đò là nơi chờ qua sông, chia tay bờ cũ và sang bờ mới. Trong mơ, nó thường xuất hiện ở ngưỡng chuyển tiếp, khi bạn biết mình không thể đứng mãi một phía.",
+      "g": ["thay-doi", "du-hanh", "mat-mat"]
+    },
+    {
+      "t": "VN bamboo bridge",
+      "v": "Cầu tre",
+      "l": "V",
+      "d": "Cầu tre mảnh nhưng đưa người qua nước. Mơ thấy cầu tre nhắc bạn tin vào phương tiện giản dị, bước chậm và giữ thăng bằng khi qua một đoạn mong manh.",
+      "g": ["du-hanh", "lo-au", "thay-doi"]
+    },
+    {
+      "t": "VN rain on tin roof",
+      "v": "Mưa trên mái tôn",
+      "l": "V",
+      "d": "Mưa trên mái tôn là âm thanh của ký ức nhà, nghèo khó, ấm áp và thao thức. Trong mơ, nó gợi cảm xúc đang rơi rất gần, không còn xa như mưa ngoài đồng.",
+      "g": ["mat-mat", "gia-dinh", "suc-khoe"]
+    },
+    {
+      "t": "VN monsoon",
+      "v": "Gió mùa",
+      "l": "V",
+      "d": "Gió mùa là sự đổi mùa chạm vào thân thể. Mơ thấy gió mùa thường báo một thay đổi khí hậu nội tâm: bạn cần mặc ấm hơn cho lòng mình hoặc mở cửa cho luồng mới.",
+      "g": ["thay-doi", "suc-khoe", "tu-nhien"]
+    },
+    {
+      "t": "VN red river silt",
+      "v": "Phù sa sông Hồng",
+      "l": "V",
+      "d": "Phù sa sông Hồng là màu đất bồi đắp qua lũ. Trong mơ, nó nói rằng những biến động từng làm đục nước có thể đang để lại chất màu mỡ cho đời bạn.",
+      "g": ["thay-doi", "tu-nhien", "gia-dinh"]
+    }
+  ]
+}

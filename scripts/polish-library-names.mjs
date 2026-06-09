@@ -1,0 +1,300 @@
+import fs from "node:fs";
+import path from "node:path";
+
+const root = process.cwd();
+const files = ["symbols-tagged-reviewed.json", "symbols-untagged-reviewed.json"];
+
+const glossary = {
+  Adobe: "Đất gạch phơi",
+  Afro: "Tóc Afro",
+  Ague: "Cơn sốt rét",
+  Amphisbaena: "Rắn hai đầu",
+  Anchor: "Mỏ neo",
+  Andirons: "Giá kê củi",
+  Androids: "Người máy",
+  Ankh: "Thập tự Ankh",
+  Aquamarine: "Đá aquamarine",
+  Argyle: "Họa tiết quả trám",
+  Armadillo: "Con tatu",
+  Asp: "Rắn hổ mang Ai Cập",
+  Aspen: "Cây dương lá rung",
+  Balaclava: "Mũ trùm Balaclava",
+  Bar: "Quán bar",
+  Barrette: "Kẹp tóc",
+  Beryl: "Đá beryl",
+  Bier: "Giàn khiêng quan tài",
+  "Blue Jay": "Chim giẻ cùi lam",
+  Bluebird: "Chim xanh",
+  "Bobby Pin": "Kẹp tăm",
+  Bologna: "Xúc xích bologna",
+  Booger: "Ghèn mũi",
+  "Boogie Board": "Ván lướt nằm",
+  Buck: "Hươu đực",
+  Bulldog: "Chó bulldog",
+  Bullhorn: "Loa cầm tay",
+  Bum: "Kẻ lang thang",
+  Burr: "Quả gai bám",
+  Cabana: "Lều nghỉ bên biển",
+  Cabin: "Căn nhà gỗ",
+  Caliper: "Thước cặp",
+  Calomel: "Bột calomel",
+  Cameo: "Phù điêu cameo",
+  Carnelian: "Đá carnelian",
+  Carriage: "Xe ngựa",
+  "Carrom Board": "Bàn cờ carrom",
+  Cashmere: "Len cashmere",
+  Casserole: "Món hầm",
+  Cassowary: "Đà điểu đầu mào",
+  Catsup: "Tương cà",
+  Caul: "Màng ối",
+  Chaps: "Quần da bảo hộ",
+  Charleston: "Điệu Charleston",
+  Chevron: "Họa tiết chữ V",
+  Chihuahua: "Chó Chihuahua",
+  Chinchilla: "Sóc chinchilla",
+  Chlamydia: "Bệnh chlamydia",
+  Churro: "Bánh churro",
+  Cincher: "Đai nịt eo",
+  Citrine: "Đá citrine",
+  Claddagh: "Nhẫn Claddagh",
+  Clarinet: "Kèn clarinet",
+  Colander: "Rổ lọc",
+  Colt: "Ngựa non",
+  Conman: "Kẻ lừa đảo",
+  Contrail: "Vệt khói máy bay",
+  Corsage: "Hoa cài áo",
+  Cream: "Kem sữa",
+  Crooked: "Cong lệch",
+  Cub: "Con non",
+  Cuckoo: "Chim cu cu",
+  Cupid: "Thần Tình Ái",
+  Dachshund: "Chó lạp xưởng",
+  Damson: "Mận damson",
+  Deer: "Con hươu",
+  Derrick: "Cần trục tháp",
+  Dodo: "Chim dodo",
+  Dreadlocks: "Tóc dreadlock",
+  Dunghill: "Đống phân",
+  Dunk: "Cú úp rổ",
+  EmeryBoard: "Dũa móng",
+  "Emery Board": "Dũa móng",
+  Emu: "Đà điểu Emu",
+  Epaulet: "Cầu vai",
+  Ermine: "Chồn ermine",
+  Exit: "Lối ra",
+  Fade: "Phai màu",
+  Fakir: "Nhà tu khổ hạnh",
+  False: "Điều giả dối",
+  Far: "Xa cách",
+  Faun: "Thần rừng nửa dê",
+  Fez: "Mũ fez",
+  Fife: "Sáo fife",
+  "Fleur De Lis": "Hoa bách hợp",
+  Foal: "Ngựa con",
+  Formaldehyde: "Formol",
+  Garret: "Gác xép",
+  Garter: "Dây nịt tất",
+  Gauze: "Gạc mỏng",
+  Geode: "Đá tinh hốc",
+  Gills: "Mang cá",
+  Gizzard: "Mề chim",
+  Gnu: "Linh dương đầu bò",
+  Goldenrod: "Hoa cúc vàng",
+  "Golf Cart": "Xe điện sân golf",
+  Griffon: "Sư ưng",
+  Grind: "Nghiền",
+  Grip: "Nắm giữ",
+  Hack: "Xâm nhập",
+  "Hacky Sack": "Túi đá cầu",
+  Hay: "Cỏ khô",
+  Hearse: "Xe tang",
+  Hem: "Gấu áo",
+  Holly: "Cây nhựa ruồi",
+  Hood: "Mũ trùm",
+  Hoopoe: "Chim đầu rìu",
+  Hubcaps: "Nắp mâm xe",
+  "Hula Hoop": "Vòng lắc eo",
+  Imp: "Tiểu quỷ",
+  Intoxicated: "Say men",
+  Jack: "Quân bồi",
+  Jackdaw: "Quạ gáy xám",
+  Jasper: "Đá jasper",
+  Jitterbug: "Điệu jitterbug",
+  Joint: "Khớp nối",
+  Katydids: "Muỗm xanh",
+  "Déjà Vu": "Cảm giác đã từng",
+  "King Kong": "Cổ tượng King Kong",
+  "Séance": "Nghi thức gọi hồn",
+  Kookaburra: "Chim bói cá kookaburra",
+  Labrador: "Chó Labrador",
+  Lamia: "Nữ quái Lamia",
+  Landau: "Xe mui trần cổ",
+  Lapis: "Đá lapis",
+  Lasso: "Dây thòng lọng",
+  Laudanum: "Rượu thuốc phiện",
+  Leeward: "Phía khuất gió",
+  Lemniscate: "Dấu vô cực",
+  Lemur: "Vượn cáo",
+  LilyPad: "Lá súng",
+  "Lily Pad": "Lá súng",
+  Loon: "Chim lặn",
+  Macadamize: "Rải đá đường",
+  Malachite: "Đá malachite",
+  Marlin: "Cá cờ",
+  Marmot: "Sóc marmot",
+  Mascara: "Chì chải mi",
+  Matador: "Dũng sĩ đấu bò",
+  "Maxi Pad": "Băng vệ sinh",
+  Mayonnaise: "Sốt mayonnaise",
+  Meerkat: "Cầy meerkat",
+  Menorah: "Đèn menorah",
+  Meow: "Tiếng mèo kêu",
+  Miller: "Người xay bột",
+  Minuet: "Điệu minuet",
+  "Mosh Pit": "Vòng nhảy cuồng nhiệt",
+  Mussels: "Trai biển",
+  Nachos: "Bánh nachos",
+  Nasturtiums: "Hoa sen cạn",
+  Nautilus: "Ốc anh vũ",
+  Ninepins: "Trò ném ki",
+  Nylons: "Tất nylon",
+  Obsidian: "Đá vỏ chai",
+  Ottoman: "Ghế đôn",
+  Pall: "Khăn phủ quan tài",
+  Pallet: "Tấm kê hàng",
+  Peridot: "Đá peridot",
+  Perm: "Tóc uốn",
+  Pew: "Ghế nhà thờ",
+  "Pieta": "Tượng Pietà",
+  Pinball: "Máy bắn bi",
+  "Popsicle": "Kem que",
+  Pterodactyl: "Thằn lằn bay",
+  Pug: "Chó pug",
+  Puma: "Báo sư tử",
+  Pyrite: "Đá pyrit",
+  Quicksilver: "Thủy ngân",
+  Quinsy: "Viêm họng mủ",
+  Quiver: "Run rẩy",
+  Quoits: "Trò ném vòng",
+  Rook: "Quân xe",
+  Rottweiler: "Chó Rottweiler",
+  Rue: "Cây cửu lý hương",
+  RV: "Xe nhà di động",
+  Sale: "Giảm giá",
+  Sash: "Dải thắt lưng",
+  Scantron: "Phiếu trắc nghiệm",
+  Schnauzer: "Chó Schnauzer",
+  Sequins: "Kim sa",
+  Shamrock: "Cỏ ba lá",
+  Shuriken: "Phi tiêu ninja",
+  Sibyl: "Nữ tiên tri",
+  Silo: "Tháp chứa",
+  Sindoor: "Bột son đỏ",
+  Sitar: "Đàn sitar",
+  Spartan: "Chiến binh Sparta",
+  Spike: "Mũi nhọn",
+  Spindle: "Con suốt",
+  Succubus: "Nữ quỷ mộng dục",
+  Suspenders: "Dây đeo quần",
+  Taffy: "Kẹo dẻo",
+  Tambourine: "Trống lục lạc",
+  Tandem: "Xe đạp đôi",
+  Tanzanite: "Đá tanzanite",
+  Tarantula: "Nhện tarantula",
+  Taser: "Súng điện",
+  TaterTots: "Khoai viên chiên",
+  "Tater Tots": "Khoai viên chiên",
+  Teepee: "Lều da đỏ",
+  Tetherball: "Bóng cột dây",
+  Thatch: "Mái tranh",
+  Thunderbird: "Chim Sấm",
+  "Tic Tac Toe": "Cờ ca rô",
+  Tocsin: "Chuông báo động",
+  Toga: "Áo choàng La Mã",
+  Toque: "Mũ toque",
+  Toucan: "Chim toucan",
+  Tourmaline: "Đá tourmaline",
+  Triquetra: "Nút thắt tam giác",
+  Trowel: "Bay xây",
+  Tuba: "Kèn tuba",
+  Tumbleweed: "Cỏ lăn",
+  Unibrow: "Lông mày liền",
+  Veneer: "Lớp phủ mỏng",
+  Viper: "Rắn lục",
+  Vise: "Ê tô",
+  Warthog: "Lợn bướu",
+  "Web Cam": "Máy quay web",
+  Weta: "Dế weta",
+  Whitewash: "Quét vôi",
+  Xylophone: "Đàn mộc cầm",
+  Yak: "Bò yak",
+  Yantra: "Đồ hình Yantra",
+  Yarmulke: "Mũ yarmulke",
+  Yodel: "Lối hát yodel",
+  Yucca: "Cây yucca",
+  Zamboni: "Xe làm phẳng băng",
+  Zephyr: "Gió tây nhẹ"
+};
+
+const mythic = new Set([
+  "Aladdin", "Anubis", "Apollo", "Armageddon", "Aswang", "Chimera", "Cleopatra", "Cyclops", "Demeter", "Dracula", "Durga",
+  "Garuda", "Godzilla", "Gremlins", "Grinch", "Harpy", "Hercules", "Hydra", "Jabberwock", "Jack Frost", "Jedi", "Joker",
+  "Kabbalah", "Kali", "Koran", "Kraken", "Krishna", "Medusa", "Minotaur", "Mona Lisa", "Pegasus", "Phantom", "Pinocchio",
+  "Popeye", "Robin Hood", "Rumpelstiltskin", "Samurai", "Shiva", "Stonehenge", "Taj Mahal", "Tiki", "Tinkerbell", "Triquetra",
+  "Vatican", "Vishnu", "Voldemort", "Yeti", "Yoga"
+]);
+
+const people = new Set([
+  "Abraham Lincoln", "Alfred E. Neuman", "Charlie Chaplin", "Darth Vader", "Freddy Krueger", "Gandhi", "Harley Quinn",
+  "Harry Potter", "Hitler", "Humpty Dumpty", "Jay Leno", "Julius Caesar", "Madonna", "Marilyn Monroe", "Peter Pan",
+  "Rube Goldberg", "Shakespeare", "Tom Cruise"
+]);
+
+const places = new Set([
+  "Burj Khalifia", "California", "Canada", "Chicago", "Colorado", "Disneyland", "Dubai", "Georgia", "Hawaii", "Hollywood",
+  "Israel", "Las Vegas", "Los Angeles", "Louisiana", "New York", "Paris", "Pompeii", "Rome", "Russia", "Texas"
+]);
+
+const brands = new Set([
+  "AIDS", "ATV", "Botox", "Cadillac", "Chrome", "CPR", "Disneyland", "DNA", "DVD", "ESP", "ET", "Facebook", "FBI",
+  "GPS", "Heroin", "Hummer", "Internet", "IPad", "IPod", "Jeep", "Jumbotron", "Kleenex", "Lamborghini", "Laser", "Lego",
+  "LSD", "Mafia", "McDonalds", "Mercedes Benz", "Modem", "Morphine", "MTV", "NASA", "Netflix", "Nike", "Novocain",
+  "Photoshop", "Pixel", "Pokemon", "RV", "Scantron", "Segway", "Skype", "Steroids", "Taser", "Tetris", "Twitter", "UFO",
+  "Uranium", "Vape", "Vaseline", "Vat", "VCR", "Velcro", "Vinyl", "Vlogging", "Web", "YMCA"
+]);
+
+function hasVietnameseMark(value) {
+  return /[ăâêôơưđáàảãạấầẩẫậắằẳẵặéèẻẽẹếềểễệíìỉĩịóòỏõọốồổỗộớờởỡợúùủũụứừửữựýỳỷỹỵ]/i.test(value);
+}
+
+function titleCaseVi(value) {
+  return String(value || "").replace(/\s+/g, " ").trim().replace(/^\p{Ll}/u, (char) => char.toUpperCase());
+}
+
+function polish(entry) {
+  const term = entry.t;
+  const current = String(entry.v || "").replace(/\s+/g, " ").trim();
+  if (glossary[term]) return glossary[term];
+  if (/^[A-Z]$/.test(term)) return `Chữ ${term}`;
+  if (people.has(term)) return `Nhân vật ${term}`;
+  if (places.has(term)) return `Vùng đất ${term}`;
+  if (mythic.has(term)) return `Cổ tượng ${term}`;
+  if (brands.has(term)) return `Dấu hiệu ${term}`;
+  if (/^[A-Z0-9]{2,}$/.test(term)) return `Ký hiệu ${term}`;
+  if (!current || /^Biểu tượng\s+/i.test(current)) return `Dấu mộng ${term}`;
+  if (!hasVietnameseMark(current) && current.toLowerCase() === term.toLowerCase()) return `Dấu mộng ${term}`;
+  return titleCaseVi(current);
+}
+
+for (const file of files) {
+  const fullPath = path.join(root, file);
+  const data = JSON.parse(fs.readFileSync(fullPath, "utf8"));
+  data.entries = data.entries.map((entry) => ({
+    ...entry,
+    v: polish(entry),
+    name_polished: true
+  }));
+  fs.writeFileSync(fullPath, JSON.stringify(data, null, 2), "utf8");
+}
+
+console.log("Polished reviewed library names.");

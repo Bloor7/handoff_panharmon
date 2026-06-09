@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Panharmon — Giao diện điện thoại</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: "Be Vietnam Pro", system-ui, sans-serif;
+    background: #f0eee9;
+  }
+</style>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#f0eee9">
+  <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <!-- Three small phone silhouettes on a warm cream background -->
+    <g fill="none" stroke="#0e0b08" stroke-width="3" stroke-linejoin="round">
+      <rect x="60"  y="100" width="80" height="170" rx="14" />
+      <rect x="160" y="80"  width="80" height="190" rx="14" fill="#0e0b08" stroke="#d4a857" />
+      <rect x="260" y="100" width="80" height="170" rx="14" />
+    </g>
+    <!-- Tiny moon on the dark center phone -->
+    <circle cx="200" cy="170" r="14" fill="none" stroke="#d4a857" stroke-width="2" />
+    <circle cx="200" cy="170" r="5"  fill="#d4a857" />
+    <!-- Stars -->
+    <circle cx="184" cy="210" r="1.5" fill="#d4a857" />
+    <circle cx="216" cy="230" r="1.5" fill="#d4a857" />
+    <circle cx="200" cy="250" r="1.2" fill="#d4a857" />
+    <!-- Label dots under each phone -->
+    <circle cx="100" cy="300" r="3" fill="#0e0b08" opacity="0.4" />
+    <circle cx="200" cy="300" r="3" fill="#d4a857" />
+    <circle cx="300" cy="300" r="3" fill="#0e0b08" opacity="0.4" />
+  </svg>
+</template>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel" src="mobile-ui.jsx"></script>
+<script type="text/babel" src="mobile-screens.jsx"></script>
+
+<script type="text/babel">
+  const App = () => (
+    <DesignCanvas>
+      <DCSection
+        id="panharmon-mobile"
+        title="Panharmon — Giao diện điện thoại"
+        subtitle="iOS · 402×874 · 6 màn hình chính"
+      >
+        <DCArtboard id="home" label="01 · Trang chủ" width={420} height={900}>
+          <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%" }}>
+            <IOSDevice dark>
+              <MobileHome />
+            </IOSDevice>
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="giai-ma" label="02 · Giải mã (nhập)" width={420} height={900}>
+          <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%" }}>
+            <IOSDevice dark>
+              <MobileGiaiMa />
+            </IOSDevice>
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="ket-qua" label="03 · Lời giải" width={420} height={900}>
+          <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%" }}>
+            <IOSDevice dark>
+              <MobileKetQua />
+            </IOSDevice>
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="tu-sach" label="04 · Tủ sách giải mã" width={420} height={900}>
+          <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%" }}>
+            <IOSDevice dark>
+              <MobileTuSach />
+            </IOSDevice>
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="thu-vien" label="05 · Thư viện biểu tượng" width={420} height={900}>
+          <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%" }}>
+            <IOSDevice dark>
+              <MobileThuVien />
+            </IOSDevice>
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="iris" label="06 · Iris (chat)" width={420} height={900}>
+          <div style={{ display: "grid", placeItems: "center", width: "100%", height: "100%" }}>
+            <IOSDevice dark>
+              <MobileIris />
+            </IOSDevice>
+          </div>
+        </DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+
+  ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
