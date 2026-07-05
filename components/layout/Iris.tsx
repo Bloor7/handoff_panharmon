@@ -2,17 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase";
+import { estimateCost } from "@/lib/credit-cost";
 
 type Message = { role: "user" | "assistant"; content: string };
 
 const IRIS_STORAGE = "iris.history.v1";
 const IRIS_GREETING = "Iris đây. Bạn có thể kể cho mình một giấc mơ, hoặc hỏi bất cứ điều gì về cõi mộng.";
-const IRIS_SYSTEM = `Bạn là Iris - một thực thể tinh tế trong thế giới giấc mơ, làm bạn đồng hành trên trang web Panharmon. Bạn nói tiếng Việt ấm áp, ngắn gọn, gợi mở.
-- Tự xưng "Iris", gọi người dùng là "bạn"
-- Trả lời 1-3 câu là chính
-- Không dùng emoji
-- Kiến thức pha trộn Jung, tri thức dân gian Việt, trống Đông Sơn, ngũ hành, văn hoá Á Đông
-- Đôi khi đặt câu hỏi ngược để khơi gợi`;
 
 function svgNum(value: number) {
   return value.toFixed(4);
@@ -74,6 +69,7 @@ export function Iris() {
   const [messages, setMessages] = useState<Message[]>([{ role: "assistant", content: IRIS_GREETING }]);
   const [input, setInput] = useState("");
   const [pending, setPending] = useState(false);
+  const [credits, setCredits] = useState<number | null>(null);
   const [unread, setUnread] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
   const [authName, setAuthName] = useState("");
@@ -81,6 +77,7 @@ export function Iris() {
   const [authPassword, setAuthPassword] = useState("");
   const [authMode, setAuthMode] = useState<"login" | "register">("login");
   const [authUserEmail, setAuthUserEmail] = useState("");
+  const [authUserName, setAuthUserName] = useState("");
   const [authError, setAuthError] = useState("");
   const [authLoading, setAuthLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -108,7 +105,9 @@ export function Iris() {
       const session = data.session;
       if (session) {
         accessTokenRef.current = session.access_token;
+        void supabase.from("credits").select("balance").eq("user_id", session.user.id).maybeSingle().then(({ data }) => { if (!cancelled) setCredits(data?.balance ?? 0); });
         setAuthUserEmail(session.user.email || "");
+        setAuthUserName(session.user.user_metadata?.full_name || "");
         const serverMessages = await loadConversation(session.access_token);
         if (!cancelled && serverMessages) setMessages(serverMessages);
       }
@@ -117,7 +116,9 @@ export function Iris() {
 
     const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
       accessTokenRef.current = session?.access_token || "";
+      if (session?.user) { void supabase.from("credits").select("balance").eq("user_id", session.user.id).maybeSingle().then(({ data }) => setCredits(data?.balance ?? 0)); } else { setCredits(null); }
       setAuthUserEmail(session?.user.email || "");
+      setAuthUserName(session?.user?.user_metadata?.full_name || "");
       if (session?.access_token) {
         void loadConversation(session.access_token).then((serverMessages) => {
           if (serverMessages) setMessages(serverMessages);
@@ -148,38 +149,83 @@ export function Iris() {
     }
   }, [open]);
 
-  const send = async () => {
-    const text = input.trim();
+  const send = async (override?: string) => {
+    const text = (override ?? input).trim();
     if (!text || pending) return;
+    if (!accessTokenRef.current) {
+      setAuthOpen(true);
+      return;
+    }
+    const cost = estimateCost(text);
+    if (credits !== null && credits < cost) {
+      setMessages([
+        ...messages,
+        { role: "user" as const, content: text },
+        { role: "assistant" as const, content: `Lượt này cần ${cost} credit nhưng bạn chỉ còn ${credits}. Bạn nạp thêm để Iris tiếp tục nhé.` }
+      ]);
+      setInput("");
+      return;
+    }
     const next = [...messages, { role: "user" as const, content: text }];
     setMessages(next);
     setInput("");
     setPending(true);
     try {
-      const recent = next.slice(-12);
+      const recent = next.slice(-12).map((m) => ({ role: m.role, content: m.content }));
       const response = await fetch("/api/claude", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages: [
-            {
-              role: "user",
-              content: `${IRIS_SYSTEM}\n\n---\nĐây là cuộc trò chuyện hiện tại. Hãy trả lời với tư cách Iris cho tin nhắn cuối của người dùng:\n\n${recent.map((m) => `${m.role === "user" ? "Người dùng" : "Iris"}: ${m.content}`).join("\n\n")}\n\nIris:`
-            }
-          ]
-        })
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessTokenRef.current}`
+        },
+        body: JSON.stringify({ messages: recent })
       });
-      const data = (await response.json()) as { text?: string; error?: string };
+      const data = (await response.json()) as { text?: string; error?: string; cost?: number; balance?: number };
+      if (response.status === 402) {
+        if (typeof data.balance === "number") setCredits(data.balance);
+        setMessages([...next, { role: "assistant" as const, content: `Lượt này cần ${data.cost ?? cost} credit nhưng bạn chỉ còn ${data.balance ?? credits ?? 0}. Bạn nạp thêm nhé.` }]);
+        return;
+      }
+      if (response.status === 401) {
+        setAuthOpen(true);
+        setMessages([...next, { role: "assistant" as const, content: "Bạn cần đăng nhập lại để Iris tiếp tục nhé." }]);
+        return;
+      }
       if (!response.ok) throw new Error(data.error || "Claude error");
-      const reply = String(data.text || "").trim().replace(/^Iris:\s*/i, "") || "Mình đang ngẫm... bạn nhắn lại nhé.";
-      setMessages([...next, { role: "assistant", content: reply }]);
+      const reply = String(data.text || "").trim() || "Iris đang ngẫm... bạn nhắn lại nhé.";
+      setMessages([...next, { role: "assistant" as const, content: reply }]);
+      if (typeof data.balance === "number") setCredits(data.balance);
       if (!open) setUnread(true);
     } catch {
-      setMessages([...next, { role: "assistant", content: "Sương mù che mất giọng nói của mình rồi. Bạn thử lại sau một chút nhé." }]);
+      setMessages([...next, { role: "assistant" as const, content: "Sương mù che mất giọng nói của Iris rồi. Bạn thử lại sau một chút nhé." }]);
     } finally {
       setPending(false);
     }
   };
+
+  const sendRef = useRef(send);
+  sendRef.current = send;
+
+  useEffect(() => {
+    if (credits !== null) window.dispatchEvent(new CustomEvent("credits:updated", { detail: { balance: credits } }));
+  }, [credits]);
+
+  useEffect(() => {
+    const onAsk = (event: Event) => {
+      const dream = (event as CustomEvent).detail?.dream;
+      if (!dream) return;
+      setOpen(true);
+      if (accessTokenRef.current) void sendRef.current(dream);
+      else { setInput(dream); setAuthOpen(true); }
+    };
+    const onOpenAuth = () => { setOpen(true); setAuthOpen(true); };
+    window.addEventListener("iris:ask", onAsk);
+    window.addEventListener("iris:open-auth", onOpenAuth);
+    return () => {
+      window.removeEventListener("iris:ask", onAsk);
+      window.removeEventListener("iris:open-auth", onOpenAuth);
+    };
+  }, []);
 
   const clearChat = () => {
     if (confirm("Xoá toàn bộ cuộc trò chuyện với Iris?")) {
@@ -238,6 +284,8 @@ export function Iris() {
     await supabaseRef.current?.auth.signOut();
     accessTokenRef.current = "";
     setAuthUserEmail("");
+    setAuthUserName("");
+    setCredits(null);
   };
 
   return (
@@ -273,7 +321,8 @@ export function Iris() {
             <div className="iris-auth">
               {authUserEmail ? (
                 <>
-                  <span>{authUserEmail}</span>
+                  <span>{authUserName || authUserEmail}{credits !== null ? ` · ${credits} credit` : ""}</span>
+                  <button type="button" className="iris-auth-open" onClick={() => window.dispatchEvent(new CustomEvent("topup:open"))}>Nạp</button>
                   <button type="button" onClick={() => void signOut()}>Đăng xuất</button>
                 </>
               ) : (
@@ -302,6 +351,11 @@ export function Iris() {
               </div>
             )}
           </div>
+          {authUserEmail && input.trim() && (
+              <div style={{ padding: "2px 16px 0", fontSize: 11, opacity: 0.55 }}>
+                Lượt này ước {estimateCost(input)} credit{credits !== null ? ` · còn ${credits}` : ""}
+              </div>
+            )}
           <div className="iris-input-wrap">
             <textarea ref={inputRef} className="iris-input" placeholder="Hỏi Iris điều gì đó..." value={input} onChange={(event) => setInput(event.target.value)} onKeyDown={(event) => {
               if (event.key === "Enter" && !event.shiftKey) {

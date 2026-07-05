@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Iris } from "@/components/layout/Iris";
 import { MobileTabBar } from "@/components/layout/MobileTabBar";
 import { Nav } from "@/components/layout/Nav";
+import { TopUpModal } from "@/components/layout/TopUpModal";
 import { StarField } from "@/components/layout/StarField";
 import { siteConfig } from "@/lib/site";
 
@@ -79,6 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
         </div>
         <Iris />
+        <TopUpModal />
         <MobileTabBar />
       </body>
     </html>
