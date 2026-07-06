@@ -4633,3 +4633,14 @@ footer {
   .nav-cta .nav-cta-label { display: none; }
   .nav-cta { padding: 11px 14px; }
 }
+
+/* ================ Section 4 — mobile per-page ≤480px ================ */
+
+/* 4.1 Trang chủ */
+@media (max-width: 480px) {
+  .hero { padding: 48px 0 36px; }
+  .hero-meta { gap: 16px; }
+  .hero-meta b { font-size: 18px; }
+  .process-step { min-height: 0; padding: 28px 20px 24px; }
+  .interp-card { padding: 18px; }
+}
