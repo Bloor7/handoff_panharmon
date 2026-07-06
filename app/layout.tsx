@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Be_Vietnam_Pro, Cormorant_Garamond } from "next/font/google";
 import "@/styles/globals.css";
 import { DrumRing } from "@/components/patterns";
@@ -22,6 +22,12 @@ const sans = Be_Vietnam_Pro({
   weight: ["300", "400", "500", "600"],
   variable: "--font-sans"
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
