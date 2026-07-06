@@ -4,7 +4,26 @@ import { useEffect, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase";
 import { estimateCost } from "@/lib/credit-cost";
 
-type Message = { role: "user" | "assistant"; content: string };
+type Message = { role: "user" | "assistant"; content: string; ts?: number; fresh?: boolean };
+
+// Khoang nghi coi la "giac mo moi": qua nguong nay thi KHONG noi ngu canh cu vao Claude.
+const THREAD_GAP_MS = 3 * 60 * 60 * 1000; // 3 tieng
+
+// Lay cac tin thuoc MACH hien tai (giac mo dang noi): di tu cuoi nguoc len,
+// dung khi gap khoang nghi dai hoac gap tin mo mach moi (fresh).
+// Tin nap lai tu server/localStorage cu khong co ts -> coi la rat cu -> khong lot vao mach.
+function currentThread(msgs: Message[]): Message[] {
+  const out: Message[] = [];
+  for (let i = msgs.length - 1; i >= 0; i -= 1) {
+    const m = msgs[i];
+    out.unshift(m);
+    if (m.fresh) break;
+    const prev = msgs[i - 1];
+    if (!prev) break;
+    if ((m.ts ?? 0) - (prev.ts ?? 0) > THREAD_GAP_MS) break;
+  }
+  return out;
+}
 
 const IRIS_STORAGE = "iris.history.v1";
 const IRIS_GREETING = "Iris đây. Bạn có thể kể cho mình một giấc mơ, hoặc hỏi bất cứ điều gì về cõi mộng.";
@@ -149,7 +168,7 @@ export function Iris() {
     }
   }, [open]);
 
-  const send = async (override?: string) => {
+  const send = async (override?: string, opts?: { fresh?: boolean }) => {
     const text = (override ?? input).trim();
     if (!text || pending) return;
     if (!accessTokenRef.current) {
@@ -157,21 +176,23 @@ export function Iris() {
       return;
     }
     const cost = estimateCost(text);
+    const now = Date.now();
     if (credits !== null && credits < cost) {
       setMessages([
         ...messages,
-        { role: "user" as const, content: text },
-        { role: "assistant" as const, content: `Lượt này cần ${cost} credit nhưng bạn chỉ còn ${credits}. Bạn nạp thêm để Iris tiếp tục nhé.` }
+        { role: "user" as const, content: text, ts: now, fresh: opts?.fresh },
+        { role: "assistant" as const, content: `Lượt này cần ${cost} credit nhưng bạn chỉ còn ${credits}. Bạn nạp thêm để Iris tiếp tục nhé.`, ts: now }
       ]);
       setInput("");
       return;
     }
-    const next = [...messages, { role: "user" as const, content: text }];
+    const next: Message[] = [...messages, { role: "user" as const, content: text, ts: now, fresh: opts?.fresh }];
     setMessages(next);
     setInput("");
     setPending(true);
     try {
-      const recent = next.slice(-12).map((m) => ({ role: m.role, content: m.content }));
+      // Chi gui MACH hien tai len Claude -> khong loi giac mo cu vao ngu canh, va re hon.
+      const recent = currentThread(next).slice(-12).map((m) => ({ role: m.role, content: m.content }));
       const response = await fetch("/api/claude", {
         method: "POST",
         headers: {
@@ -183,21 +204,21 @@ export function Iris() {
       const data = (await response.json()) as { text?: string; error?: string; cost?: number; balance?: number };
       if (response.status === 402) {
         if (typeof data.balance === "number") setCredits(data.balance);
-        setMessages([...next, { role: "assistant" as const, content: `Lượt này cần ${data.cost ?? cost} credit nhưng bạn chỉ còn ${data.balance ?? credits ?? 0}. Bạn nạp thêm nhé.` }]);
+        setMessages([...next, { role: "assistant" as const, content: `Lượt này cần ${data.cost ?? cost} credit nhưng bạn chỉ còn ${data.balance ?? credits ?? 0}. Bạn nạp thêm nhé.`, ts: Date.now() }]);
         return;
       }
       if (response.status === 401) {
         setAuthOpen(true);
-        setMessages([...next, { role: "assistant" as const, content: "Bạn cần đăng nhập lại để Iris tiếp tục nhé." }]);
+        setMessages([...next, { role: "assistant" as const, content: "Bạn cần đăng nhập lại để Iris tiếp tục nhé.", ts: Date.now() }]);
         return;
       }
       if (!response.ok) throw new Error(data.error || "Claude error");
       const reply = String(data.text || "").trim() || "Iris đang ngẫm... bạn nhắn lại nhé.";
-      setMessages([...next, { role: "assistant" as const, content: reply }]);
+      setMessages([...next, { role: "assistant" as const, content: reply, ts: Date.now() }]);
       if (typeof data.balance === "number") setCredits(data.balance);
       if (!open) setUnread(true);
     } catch {
-      setMessages([...next, { role: "assistant" as const, content: "Sương mù che mất giọng nói của Iris rồi. Bạn thử lại sau một chút nhé." }]);
+      setMessages([...next, { role: "assistant" as const, content: "Sương mù che mất giọng nói của Iris rồi. Bạn thử lại sau một chút nhé.", ts: Date.now() }]);
     } finally {
       setPending(false);
     }
@@ -215,7 +236,7 @@ export function Iris() {
       const dream = (event as CustomEvent).detail?.dream;
       if (!dream) return;
       setOpen(true);
-      if (accessTokenRef.current) void sendRef.current(dream);
+      if (accessTokenRef.current) void sendRef.current(dream, { fresh: true });
       else { setInput(dream); setAuthOpen(true); }
     };
     const onOpenAuth = () => { setOpen(true); setAuthOpen(true); };
