@@ -4668,3 +4668,10 @@ footer {
   .sleep-card { padding: 20px; }
   .sleep-goods { margin-top: 56px; padding-top: 40px; }
 }
+
+/* 4.5 lien-he ≤480px */
+@media (max-width: 480px) {
+  .contact-info,
+  .contact-form { padding: 20px; border-radius: 14px; }
+  .contact-info { gap: 16px; }
+}
