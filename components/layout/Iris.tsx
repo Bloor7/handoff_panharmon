@@ -357,6 +357,11 @@ export function Iris() {
       {open && (
         <div className="iris-panel" role="dialog" aria-label="Iris chat">
           <header className="iris-head">
+            <button className="iris-back" type="button" onClick={() => setOpen(false)} aria-label="Đóng Iris">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 4L6 10l6 6" />
+              </svg>
+            </button>
             <div className="iris-avatar">
               <IrisMark size={22} />
             </div>
