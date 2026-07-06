@@ -103,7 +103,10 @@ export async function POST(request: Request) {
     const response = await anthropic.messages.create({
       model: "claude-haiku-4-5",
       max_tokens: 1500,
-      system: IRIS_SYSTEM_PROMPT,
+      // System prompt giong het moi luot -> cache lai, luot sau chi tinh 10% gia input.
+      system: [
+        { type: "text", text: IRIS_SYSTEM_PROMPT, cache_control: { type: "ephemeral" } }
+      ],
       messages
     });
     const text =
@@ -111,13 +114,21 @@ export async function POST(request: Request) {
     if (!text) throw new Error("empty response");
 
     // Ghi nhật ký AI (không chặn phản hồi nếu ghi lỗi)
+    const usage = response.usage;
+    const cacheRead = usage?.cache_read_input_tokens ?? 0;
+    const cacheCreate = usage?.cache_creation_input_tokens ?? 0;
     void supabase.from("ai_logs").insert({
       user_id: userId,
       feature: "giai_mo",
       prompt: lastUser.slice(0, 2000),
       response: text.slice(0, 4000),
       model: "claude-haiku-4-5",
-      tokens: (response.usage?.input_tokens ?? 0) + (response.usage?.output_tokens ?? 0)
+      // tokens = tong that (input chua cache + cache doc + cache ghi + output)
+      tokens: (usage?.input_tokens ?? 0) + cacheRead + cacheCreate + (usage?.output_tokens ?? 0),
+      input_tokens: usage?.input_tokens ?? null,
+      output_tokens: usage?.output_tokens ?? null,
+      cache_read_tokens: cacheRead,
+      cache_creation_tokens: cacheCreate
     });
 
     return NextResponse.json({ text, cost, balance: balanceAfter });
