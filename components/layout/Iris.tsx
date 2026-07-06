@@ -103,6 +103,12 @@ export function Iris() {
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
   const accessTokenRef = useRef("");
   const supabaseRef = useRef<ReturnType<typeof createClient> | null>(null);
+  // Chi nap lich su tu server MOT LAN moi phien (chong token-refresh keo ban cu ve de).
+  const hydratedRef = useRef(false);
+  // Luu tuan tu: chi 1 PUT in-flight; neu co thay doi khi dang bay thi luu lai voi ban moi nhat.
+  const savingRef = useRef(false);
+  const dirtyRef = useRef(false);
+  const latestMessagesRef = useRef<Message[]>([]);
   const authConfigured = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 
   useEffect(() => {
@@ -127,18 +133,23 @@ export function Iris() {
         void supabase.from("credits").select("balance").eq("user_id", session.user.id).maybeSingle().then(({ data }) => { if (!cancelled) setCredits(data?.balance ?? 0); });
         setAuthUserEmail(session.user.email || "");
         setAuthUserName(session.user.user_metadata?.full_name || "");
-        const serverMessages = await loadConversation(session.access_token);
-        if (!cancelled && serverMessages) setMessages(serverMessages);
+        if (!hydratedRef.current) {
+          hydratedRef.current = true;
+          const serverMessages = await loadConversation(session.access_token);
+          if (!cancelled && serverMessages) setMessages(serverMessages);
+        }
       }
       setMounted(true);
     });
 
     const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
       accessTokenRef.current = session?.access_token || "";
-      if (session?.user) { void supabase.from("credits").select("balance").eq("user_id", session.user.id).maybeSingle().then(({ data }) => setCredits(data?.balance ?? 0)); } else { setCredits(null); }
+      if (session?.user) { void supabase.from("credits").select("balance").eq("user_id", session.user.id).maybeSingle().then(({ data }) => setCredits(data?.balance ?? 0)); } else { setCredits(null); hydratedRef.current = false; }
       setAuthUserEmail(session?.user.email || "");
       setAuthUserName(session?.user?.user_metadata?.full_name || "");
-      if (session?.access_token) {
+      // Chi nap 1 lan: token-refresh dinh ky se KHONG keo ban cu ve de state dang co.
+      if (session?.access_token && !hydratedRef.current) {
+        hydratedRef.current = true;
         void loadConversation(session.access_token).then((serverMessages) => {
           if (serverMessages) setMessages(serverMessages);
         });
@@ -151,10 +162,31 @@ export function Iris() {
     };
   }, [authConfigured]);
 
+  // Luu server tuan tu: dam bao chi 1 PUT bay moi luc (server la delete-all-insert nen 2 PUT
+  // song song co the dao thu tu -> ban cu de ban moi -> mat tin). Sau moi PUT, neu con thay doi
+  // thi luu lai voi ban moi nhat. localStorage luu ngay, khong cho.
+  const flushSave = async () => {
+    if (savingRef.current) return;
+    if (!accessTokenRef.current) return;
+    if (!dirtyRef.current) return;
+    savingRef.current = true;
+    dirtyRef.current = false;
+    const snapshot = latestMessagesRef.current;
+    try {
+      await saveConversation(accessTokenRef.current, snapshot);
+    } finally {
+      savingRef.current = false;
+      if (dirtyRef.current) void flushSave();
+    }
+  };
+
   useEffect(() => {
     if (!mounted) return;
     saveHistory(messages);
-    if (accessTokenRef.current) void saveConversation(accessTokenRef.current, messages);
+    latestMessagesRef.current = messages;
+    if (!accessTokenRef.current) return;
+    dirtyRef.current = true;
+    void flushSave();
   }, [messages, mounted]);
 
   useEffect(() => {
