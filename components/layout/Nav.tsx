@@ -14,17 +14,14 @@ const navItems = [
   { path: "/lien-he", label: "Liên hệ" }
 ];
 
-const pill: React.CSSProperties = {
-  background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)",
-  color: "#eae3d2", borderRadius: 999, padding: "5px 12px", fontSize: 13, cursor: "pointer"
-};
-
 export function Nav() {
   const pathname = usePathname();
   const router = useRouter();
   const [userName, setUserName] = useState<string | null>(null);
   const [credits, setCredits] = useState<number | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const supabaseRef = useRef<ReturnType<typeof createClient> | null>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const authConfigured = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
@@ -60,6 +57,16 @@ export function Nav() {
     };
   }, []);
 
+  // Dong menu khi bam ra ngoai.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onDown = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) setMenuOpen(false);
+    };
+    window.addEventListener("mousedown", onDown);
+    return () => window.removeEventListener("mousedown", onDown);
+  }, [menuOpen]);
+
   const scrollToInterpreter = () => {
     if (pathname === "/") {
       document.getElementById("giai-ma")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -73,6 +80,8 @@ export function Nav() {
   const signOut = async () => {
     await supabaseRef.current?.auth.signOut();
   };
+
+  const initial = (userName?.trim()?.[0] || "B").toUpperCase();
 
   return (
     <header className="nav">
@@ -90,20 +99,39 @@ export function Nav() {
             </Link>
           ))}
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <div className="nav-actions">
           {userName ? (
-            <>
-              <button type="button" style={{ ...pill, color: "#d4a857" }} onClick={openTopup} title="Nạp credit">
-                {credits ?? 0} credit +
+            <div className="nav-account" ref={menuRef}>
+              <button
+                type="button"
+                className="nav-avatar"
+                onClick={() => setMenuOpen((value) => !value)}
+                aria-haspopup="menu"
+                aria-expanded={menuOpen}
+                title={userName}
+              >
+                {initial}
               </button>
-              <span style={{ fontSize: 13, opacity: 0.8, maxWidth: 120, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{userName}</span>
-              <button type="button" style={pill} onClick={() => void signOut()}>Đăng xuất</button>
-            </>
+              {menuOpen && (
+                <div className="nav-menu" role="menu">
+                  <div className="nav-menu-head">
+                    <span className="nav-menu-name">{userName}</span>
+                    <span className="nav-menu-credit">{credits ?? 0} credit</span>
+                  </div>
+                  <button type="button" role="menuitem" className="nav-menu-item" onClick={() => { setMenuOpen(false); openTopup(); }}>
+                    Nạp credit
+                  </button>
+                  <button type="button" role="menuitem" className="nav-menu-item danger" onClick={() => { setMenuOpen(false); void signOut(); }}>
+                    Đăng xuất
+                  </button>
+                </div>
+              )}
+            </div>
           ) : (
-            <button type="button" style={pill} onClick={openAuth}>Đăng nhập</button>
+            <button type="button" className="nav-login" onClick={openAuth}>Đăng nhập</button>
           )}
-          <button className="btn btn-primary" type="button" onClick={scrollToInterpreter}>
-            Giải mã ngay
+          <button className="btn btn-primary nav-cta" type="button" onClick={scrollToInterpreter}>
+            <span className="nav-cta-label">Giải mã ngay</span>
             <ArrowIcon />
           </button>
         </div>
