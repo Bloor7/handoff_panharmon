@@ -33,9 +33,25 @@ export function getAllowedAdminEmails() {
   return Array.from(new Set(emails));
 }
 
-export function isAllowedAdmin(email: string, password: string) {
-  const allowedEmails = getAllowedAdminEmails();
-  return allowedEmails.includes(email.trim().toLowerCase()) && password === process.env.ADMIN_PASSWORD;
+async function timingSafeEqualStr(a: string, b: string) {
+  // Bam SHA-256 ca hai chuoi -> do dai luon 32 byte, roi so tung byte bang XOR.
+  // Vong lap co dinh, khong phu thuoc noi dung/do dai mat khau -> chong timing attack.
+  const digest = async (value: string) =>
+    new Uint8Array(await crypto.subtle.digest("SHA-256", encoder.encode(value)));
+  const [ha, hb] = await Promise.all([digest(a), digest(b)]);
+  let diff = 0;
+  for (let i = 0; i < ha.length; i += 1) diff |= ha[i] ^ hb[i];
+  return diff === 0;
+}
+
+export async function isAllowedAdmin(email: string, password: string) {
+  const expected = process.env.ADMIN_PASSWORD;
+  if (!expected) return false;
+  const emailOk = getAllowedAdminEmails().includes(email.trim().toLowerCase());
+  // Luon chay so mat khau du email dung hay sai, de khong lo qua thoi gian
+  // "email nao la admin" (chong email enumeration).
+  const passwordOk = await timingSafeEqualStr(password, expected);
+  return emailOk && passwordOk;
 }
 
 export async function createAdminSession(email: string) {
