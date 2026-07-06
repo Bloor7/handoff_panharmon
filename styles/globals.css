@@ -4675,3 +4675,11 @@ footer {
   .contact-form { padding: 20px; border-radius: 14px; }
   .contact-info { gap: 16px; }
 }
+
+/* 4.6 Modal close buttons — tap target ≥44px */
+.topup-close {
+  min-width: 44px;
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+}

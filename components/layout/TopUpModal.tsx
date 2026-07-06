@@ -43,7 +43,8 @@ export function TopUpModal() {
           type="button"
           onClick={() => setOpen(false)}
           aria-label="Đóng"
-          style={{ position: "absolute", top: 14, right: 14, background: "none", border: "none", color: "#eae3d2", cursor: "pointer", opacity: 0.7 }}
+          className="topup-close"
+          style={{ position: "absolute", top: 6, right: 6, background: "none", border: "none", color: "#eae3d2", cursor: "pointer", opacity: 0.7 }}
         >
           <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
             <path d="M5 5L15 15M15 5L5 15" />
