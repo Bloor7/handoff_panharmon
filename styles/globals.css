@@ -1588,6 +1588,9 @@ footer {
 /* Leaf nodes (HTML over SVG) â€” DEPRECATED, replaced by .mt-panel */
 .mt-leaves { display: none; }
 
+/* Mobile grid — ẩn trên desktop, hiện thay SVG drum ≤600px */
+.mt-mobile-grid { display: none; }
+
 /* === Scroll panel (Cuá»™n ThÆ°) === */
 .mt-panel {
   position: absolute;
@@ -4682,4 +4685,100 @@ footer {
   min-height: 44px;
   display: grid;
   place-items: center;
+}
+
+/* ================ Section 4.4: thu-vien — mobile library ≤600px ================ */
+@media (max-width: 600px) {
+  /* Ẩn SVG drum — quá nhỏ để chạm */
+  .mt-tree-wrap { display: none; }
+
+  /* Hiện mobile branch grid */
+  .mt-mobile-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 0 0 28px;
+  }
+
+  .mt-mobile-branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 7px;
+    padding: 14px 8px 12px;
+    min-height: 84px;
+    background: rgba(17, 22, 52, 0.55);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    cursor: pointer;
+    font-family: inherit;
+    color: var(--ink);
+    transition: background 0.2s var(--ease), border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mt-mobile-branch:active {
+    transform: scale(0.96);
+  }
+  .mt-mobile-branch.on {
+    border-color: var(--accent, var(--gold));
+    background: linear-gradient(180deg, color-mix(in oklab, var(--accent, var(--gold)) 14%, transparent), rgba(17, 22, 52, 0.55));
+    box-shadow: 0 0 18px -6px var(--accent, var(--gold));
+  }
+
+  .mt-mobile-icon {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    color: var(--accent, var(--gold));
+    opacity: 0.85;
+    transition: opacity 0.2s;
+  }
+  .mt-mobile-branch.on .mt-mobile-icon { opacity: 1; }
+
+  .mt-mobile-name {
+    font-family: var(--serif);
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--ink);
+    text-align: center;
+    line-height: 1.2;
+  }
+  .mt-mobile-branch.on .mt-mobile-name { color: var(--accent, var(--gold)); }
+
+  .mt-mobile-count {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--ink-mute);
+    font-family: var(--sans);
+  }
+
+  /* bp-close: tăng tap target */
+  .bp-close { width: 44px; height: 44px; }
+
+  /* PlacedTable mobile */
+  .placed-table { padding: 20px 16px 24px; border-radius: 16px; }
+  .placed-title { font-size: 22px; }
+  /* Nút xoá lá: luôn hiện trên touch (không có hover) */
+  .placed-card-remove {
+    opacity: 1;
+    width: 28px;
+    height: 28px;
+  }
+  /* Bàn rút: 2 cột trên mobile thay vì cuộn ngang */
+  .placed-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    justify-items: center;
+  }
+  .placed-card {
+    width: 100%;
+    min-height: 180px;
+    padding: 14px 10px 48px;
+    transform: rotate(0deg) !important;
+  }
+  .placed-slot-ghost { width: 100%; height: 160px; font-size: 22px; }
+  .placed-foot { flex-direction: column; align-items: stretch; gap: 10px; }
+  .placed-decode-all { text-align: center; justify-content: center; }
 }

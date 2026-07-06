@@ -81,6 +81,7 @@ export function MongTrieuTree({ data, activeKey, onOpenBranch }: { data: Library
   })();
 
   return (
+    <>
     <div className={`mt-tree-wrap drum ${activeTag ? "has-active" : ""}`}>
       <svg className="mt-tree-svg" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet">
         <g className="drum-band outer">
@@ -138,5 +139,26 @@ export function MongTrieuTree({ data, activeKey, onOpenBranch }: { data: Library
       </svg>
       <div className="mt-hint">{activeTag ? `${activeTag.count.toLocaleString("vi-VN")} biểu tượng trong "${activeTag.vi}" - đang mở danh sách` : `${data.entries.length.toLocaleString("vi-VN")} biểu tượng · 18 nhánh cảm xúc - chạm nhánh để mở danh sách thẻ`}</div>
     </div>
+
+    {/* Mobile branch grid — hiện thay SVG drum ở ≤600px */}
+    <div className="mt-mobile-grid" aria-label="Các nhánh cảm xúc">
+      {tagPositions.map((tag) => (
+        <button
+          key={tag.key}
+          type="button"
+          className={`mt-mobile-branch${activeKey === tag.key ? " on" : ""}`}
+          style={{ "--accent": tag.color } as React.CSSProperties}
+          onClick={() => onOpenBranch(activeKey === tag.key ? null : tag)}
+          aria-pressed={activeKey === tag.key}
+        >
+          <svg className="mt-mobile-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <EmotionIcon type={tag.key} x={12} y={12} />
+          </svg>
+          <span className="mt-mobile-name">{tag.vi}</span>
+          <span className="mt-mobile-count">{tag.count.toLocaleString("vi-VN")}</span>
+        </button>
+      ))}
+    </div>
+    </>
   );
 }
