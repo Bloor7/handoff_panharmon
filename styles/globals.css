@@ -4660,3 +4660,11 @@ footer {
   }
   .blog-card-title { font-size: 22px; }
 }
+
+/* 4.3 san-pham ≤480px */
+@media (max-width: 480px) {
+  .product-card { padding: 24px; }
+  .compare { padding: 16px; }
+  .sleep-card { padding: 20px; }
+  .sleep-goods { margin-top: 56px; padding-top: 40px; }
+}
