@@ -442,7 +442,7 @@ export function Iris() {
               <div className="iris-avatar"><IrisMark size={22} /></div>
               <div>
                 <h3>{authMode === "login" ? "Đăng nhập Iris" : "Tạo tài khoản Iris"}</h3>
-                <p>Lưu lịch sử trò chuyện và tiếp tục cuộc trò chuyện ở lần sau.</p>
+                <p>Vui lòng đăng nhập để trò chuyện với Iris và lưu lịch sử giải mã.</p>
               </div>
             </div>
             <div className="iris-auth-tabs">

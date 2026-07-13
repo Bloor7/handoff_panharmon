@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { Resend } from "resend";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
 const contactSchema = z.object({
@@ -15,6 +16,11 @@ function getClientIp(request: Request) {
   return request.headers.get("x-real-ip")?.trim() || "unknown";
 }
 
+function getResend() {
+  const key = process.env.RESEND_API_KEY;
+  return key ? new Resend(key) : null;
+}
+
 export async function POST(request: Request) {
   const parsed = contactSchema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) {
@@ -23,7 +29,6 @@ export async function POST(request: Request) {
 
   const supabase = getSupabaseAdmin();
   if (!supabase) {
-    // Khong cau hinh duoc DB -> KHONG gia vo thanh cong (tranh nuot lead).
     console.error("[contact] Supabase admin chua cau hinh, khong luu duoc lead");
     return NextResponse.json(
       { error: "Hệ thống liên hệ tạm thời gián đoạn. Vui lòng thử lại sau." },
@@ -43,12 +48,35 @@ export async function POST(request: Request) {
   });
 
   if (error) {
-    // Fail-closed: bao that de khach thu lai, khong tra ok:true roi mat lead.
     console.error("[contact] Luu lead that bai:", error.message);
     return NextResponse.json(
       { error: "Không gửi được liên hệ. Vui lòng thử lại sau." },
       { status: 500 }
     );
+  }
+
+  // Gửi email thông báo — không block thành công nếu Resend chưa cấu hình.
+  const resend = getResend();
+  if (resend) {
+    const fromDomain = process.env.RESEND_FROM ?? "noreply@panharmon.com";
+    const { error: mailError } = await resend.emails.send({
+      from: `Panharmon Contact <${fromDomain}>`,
+      to: "panharmon@gmail.com",
+      replyTo: parsed.data.email,
+      subject: `[Liên hệ] ${parsed.data.topic} — ${parsed.data.name}`,
+      text: [
+        `Tên: ${parsed.data.name}`,
+        `Email: ${parsed.data.email}`,
+        `Chủ đề: ${parsed.data.topic}`,
+        "",
+        parsed.data.message
+      ].join("\n")
+    });
+    if (mailError) {
+      console.error("[contact] Gui email that bai:", mailError);
+    }
+  } else {
+    console.warn("[contact] RESEND_API_KEY chua dat — bo qua gui email");
   }
 
   return NextResponse.json({ ok: true });

@@ -127,9 +127,7 @@ export function Nav() {
                 </div>
               )}
             </div>
-          ) : (
-            <button type="button" className="nav-login" onClick={openAuth}>Đăng nhập</button>
-          )}
+          ) : null}
           <button className="btn btn-primary nav-cta" type="button" onClick={scrollToInterpreter}>
             <span className="nav-cta-label">Giải mã ngay</span>
             <ArrowIcon />

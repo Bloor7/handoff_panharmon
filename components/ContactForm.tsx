@@ -10,15 +10,16 @@ export function ContactForm() {
       className="contact-form"
       onSubmit={async (event) => {
         event.preventDefault();
+        const formEl = event.currentTarget;
         setStatus("loading");
-        const form = new FormData(event.currentTarget);
+        const form = new FormData(formEl);
         const response = await fetch("/api/contact", {
           method: "POST",
           body: JSON.stringify(Object.fromEntries(form)),
           headers: { "Content-Type": "application/json" }
         });
         setStatus(response.ok ? "success" : "error");
-        if (response.ok) event.currentTarget.reset();
+        if (response.ok) formEl.reset();
         setTimeout(() => setStatus("idle"), 4000);
       }}
     >

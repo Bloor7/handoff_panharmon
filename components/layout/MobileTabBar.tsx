@@ -53,8 +53,9 @@ export function MobileTabBar() {
     { href: "/", id: "home", label: "Trang chủ", icon: "home" as const, active: pathname === "/" },
     { href: "/giai-ma", id: "blog", label: "Tủ sách", icon: "book" as const, active: pathname.startsWith("/giai-ma") || pathname.startsWith("/blog") },
     { href: "/thu-vien", id: "tree", label: "Thư viện", icon: "tree" as const, active: pathname.startsWith("/thu-vien") },
-    { href: "#iris", id: "iris", label: "Iris", icon: "chat" as const, active: false }
   ];
+
+  const openIris = () => window.dispatchEvent(new CustomEvent("iris:open-auth"));
 
   return (
     <div className="m-tabbar site-mobile-tabbar" aria-label="Điều hướng mobile">
@@ -65,6 +66,11 @@ export function MobileTabBar() {
           <div className="m-tab-dot" style={{ opacity: tab.active ? 1 : 0 }} />
         </Link>
       ))}
+      <button type="button" className="m-tab" onClick={openIris}>
+        <Icon type="chat" />
+        <span>Iris</span>
+        <div className="m-tab-dot" style={{ opacity: 0 }} />
+      </button>
     </div>
   );
 }
