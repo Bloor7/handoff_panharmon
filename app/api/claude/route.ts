@@ -113,23 +113,31 @@ export async function POST(request: Request) {
       response.content.find((block) => block.type === "text")?.text?.trim() || "";
     if (!text) throw new Error("empty response");
 
-    // Ghi nhật ký AI (không chặn phản hồi nếu ghi lỗi)
+    // Ghi nhật ký AI. PHẢI await: trên Vercel, hàm return xong là bị đóng băng ngay,
+    // "void insert" (fire-and-forget) sẽ bị cắt giữa chừng -> ai_logs trống trên production.
+    // Bọc try/catch RIÊNG: lỗi ghi log KHÔNG được rơi vào catch ngoài (chỗ đó hoàn credit),
+    // vì Iris đã trả bài xong rồi — hỏng sổ sách thì chịu, không được cướp bài của khách.
     const usage = response.usage;
     const cacheRead = usage?.cache_read_input_tokens ?? 0;
     const cacheCreate = usage?.cache_creation_input_tokens ?? 0;
-    void supabase.from("ai_logs").insert({
-      user_id: userId,
-      feature: "giai_mo",
-      prompt: lastUser.slice(0, 2000),
-      response: text.slice(0, 4000),
-      model: "claude-haiku-4-5",
-      // tokens = tong that (input chua cache + cache doc + cache ghi + output)
-      tokens: (usage?.input_tokens ?? 0) + cacheRead + cacheCreate + (usage?.output_tokens ?? 0),
-      input_tokens: usage?.input_tokens ?? null,
-      output_tokens: usage?.output_tokens ?? null,
-      cache_read_tokens: cacheRead,
-      cache_creation_tokens: cacheCreate
-    });
+    try {
+      const { error: logError } = await supabase.from("ai_logs").insert({
+        user_id: userId,
+        feature: "giai_mo",
+        prompt: lastUser.slice(0, 2000),
+        response: text.slice(0, 4000),
+        model: "claude-haiku-4-5",
+        // tokens = tong that (input chua cache + cache doc + cache ghi + output)
+        tokens: (usage?.input_tokens ?? 0) + cacheRead + cacheCreate + (usage?.output_tokens ?? 0),
+        input_tokens: usage?.input_tokens ?? null,
+        output_tokens: usage?.output_tokens ?? null,
+        cache_read_tokens: cacheRead,
+        cache_creation_tokens: cacheCreate
+      });
+      if (logError) console.error("ai_logs insert failed:", logError.message);
+    } catch (e) {
+      console.error("ai_logs insert threw:", e);
+    }
 
     return NextResponse.json({ text, cost, balance: balanceAfter });
   } catch {
